@@ -96,7 +96,7 @@ export const RouteMap: React.FC<RouteMapProps> = ({
           </span>
           <h4 class="font-bold text-slate-900 text-sm">${place.name}</h4>
           <p class="text-xs text-slate-600 mt-0.5">${place.address}</p>
-          <p class="text-xs text-slate-600"><strong>Tel:</strong> ${place.phone}</p>
+          <p class="text-xs text-slate-600"><strong>Tel:</strong> <a href="tel:${place.phone.split(/[/oO-]/)[0]?.replace(/\D/g, '') || ''}" class="text-blue-600 hover:underline font-medium">${place.phone}</a></p>
           <p class="text-xs text-emerald-700 font-semibold mt-1">Precio: ${place.price}</p>
           <div class="mt-2 pt-1.5 border-t border-slate-100 flex items-center gap-2.5 flex-wrap">
             <a href="https://maps.google.com/?q=${encodeURIComponent(place.address)}" target="_blank" rel="noreferrer" class="text-[11px] text-blue-600 hover:underline font-medium">Google Maps ↗</a>
