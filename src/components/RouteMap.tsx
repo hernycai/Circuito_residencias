@@ -98,8 +98,9 @@ export const RouteMap: React.FC<RouteMapProps> = ({
           <p class="text-xs text-slate-600 mt-0.5">${place.address}</p>
           <p class="text-xs text-slate-600"><strong>Tel:</strong> ${place.phone}</p>
           <p class="text-xs text-emerald-700 font-semibold mt-1">Precio: ${place.price}</p>
-          <div class="mt-2 pt-1.5 border-t border-slate-100 flex gap-2">
+          <div class="mt-2 pt-1.5 border-t border-slate-100 flex items-center gap-2.5 flex-wrap">
             <a href="https://maps.google.com/?q=${encodeURIComponent(place.address)}" target="_blank" rel="noreferrer" class="text-[11px] text-blue-600 hover:underline font-medium">Google Maps ↗</a>
+            ${place.website ? `<a href="${/^https?:\/\//i.test(place.website) ? place.website : 'https://' + place.website}" target="_blank" rel="noreferrer" class="text-[11px] text-emerald-700 hover:underline font-medium">Sitio Web ↗</a>` : ''}
           </div>
         </div>
       `;

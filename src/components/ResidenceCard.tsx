@@ -2,6 +2,7 @@ import React from 'react';
 import {
   MapPin,
   Phone,
+  Globe,
   ExternalLink,
   MessageCircle,
   CheckCircle2,
@@ -38,6 +39,16 @@ export const ResidenceCard: React.FC<ResidenceCardProps> = ({
 }) => {
   const cleanPhone = place.phone.replace(/\D/g, '');
   const gmapsUrl = `https://maps.google.com/?q=${encodeURIComponent(place.address)}`;
+
+  const normalizeUrl = (url?: string) => {
+    if (!url) return '';
+    const trimmed = url.trim();
+    if (!trimmed) return '';
+    if (/^https?:\/\//i.test(trimmed)) {
+      return trimmed;
+    }
+    return `https://${trimmed}`;
+  };
 
   const handleBlurText = (field: keyof ResidencePlace, value: string) => {
     onUpdate({
@@ -189,6 +200,48 @@ export const ResidenceCard: React.FC<ResidenceCardProps> = ({
                   </a>
                 )}
               </div>
+            </div>
+
+            {/* Website / Enlace al sitio */}
+            <div className="text-slate-600 text-sm mt-1 flex items-center gap-1.5 flex-wrap">
+              <Globe className="w-4 h-4 text-slate-400 shrink-0" />
+              <strong className="text-slate-700">Sitio Web:</strong>
+              <span
+                contentEditable
+                suppressContentEditableWarning
+                onBlur={(e) => {
+                  const val = e.currentTarget.textContent || '';
+                  handleBlurText('website', val === 'Agregar link del sitio...' ? '' : val);
+                }}
+                onFocus={(e) => {
+                  if (e.currentTarget.textContent === 'Agregar link del sitio...') {
+                    e.currentTarget.textContent = '';
+                  }
+                }}
+                className={`editable-field max-w-[220px] sm:max-w-[340px] truncate inline-block align-middle px-1 py-0.5 rounded font-medium ${
+                  place.website && place.website.trim()
+                    ? 'text-blue-700 underline decoration-blue-200 hover:decoration-blue-400 underline-offset-2'
+                    : 'text-slate-400 italic'
+                }`}
+                title={place.website ? `Sitio: ${place.website} (Haz clic para editar)` : 'Haz clic para editar el enlace del sitio'}
+              >
+                {place.website && place.website.trim() ? place.website : 'Agregar link del sitio...'}
+              </span>
+
+              {place.website && place.website.trim() && (
+                <div className="no-print inline-flex items-center gap-1 ml-1 shrink-0">
+                  <a
+                    href={normalizeUrl(place.website)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200/70 px-2 py-0.5 rounded-lg transition-colors shadow-2xs"
+                    title="Abrir enlace del sitio web en nueva pestaña"
+                  >
+                    <span>Visitar web</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>

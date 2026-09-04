@@ -10,6 +10,7 @@ export interface ResidencePlace {
   badge: string;
   address: string;
   phone: string;
+  website?: string;
   priceType: 'single' | 'tiered';
   price: string;
   pricesTiered?: TieredPrice[];

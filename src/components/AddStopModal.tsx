@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, Plus, MapPin } from 'lucide-react';
+import { X, Plus, MapPin, FileSpreadsheet } from 'lucide-react';
 import { ResidencePlace } from '../types';
+import { PLANILLA_DATA } from '../data/initialData';
 
 interface AddStopModalProps {
   isOpen: boolean;
@@ -18,12 +19,29 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
+  const [website, setWebsite] = useState('');
   const [price, setPrice] = useState('');
   const [notes, setNotes] = useState('');
   const [lat, setLat] = useState<number>(-34.614);
   const [lng, setLng] = useState<number>(-58.697);
 
   if (!isOpen) return null;
+
+  const handleSelectFromSheet = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedName = e.target.value;
+    if (!selectedName) return;
+    const entry = PLANILLA_DATA.find((p) => p.nombre === selectedName);
+    if (entry) {
+      setName(entry.nombre);
+      setAddress(entry.ubicacion);
+      setPhone(entry.tel);
+      setWebsite(entry.link);
+      setPrice(entry.precio);
+      setLat(entry.lat);
+      setLng(entry.lng);
+      setNotes(`Datos importados de la planilla. Ubicación: ${entry.ubicacion}.`);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +53,7 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
       badge: 'En rojo',
       address: address.trim(),
       phone: phone.trim() || 'Sin teléfono',
+      website: website.trim() || undefined,
       priceType: 'single',
       price: price.trim() || 'A consultar en visita',
       notes: notes.trim() || 'Pendiente de visita.',
@@ -67,6 +86,28 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
         </div>
 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
+          {/* Quick autofill from spreadsheet */}
+          <div className="bg-slate-50 border border-slate-200 rounded-xl p-3">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5 flex items-center gap-1.5">
+              <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
+              Cargar rápido desde tu planilla (11 residencias):
+            </label>
+            <select
+              onChange={handleSelectFromSheet}
+              defaultValue=""
+              className="w-full text-xs bg-white text-slate-800 border border-slate-300 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-red-500 font-medium cursor-pointer"
+            >
+              <option value="" disabled>
+                -- Seleccionar residencia de la planilla para autorrellenar --
+              </option>
+              {PLANILLA_DATA.map((item) => (
+                <option key={item.nombre} value={item.nombre}>
+                  {item.nombre} ({item.ubicacion})
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
               Nombre de la residencia *
@@ -121,6 +162,19 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
                 className="w-full text-sm bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
+              Sitio web / Enlace (opcional)
+            </label>
+            <input
+              type="text"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              placeholder="Ej. https://ayresdeleloir.com.ar o www.sitio.com"
+              className="w-full text-sm bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-3">

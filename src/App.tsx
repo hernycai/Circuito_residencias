@@ -12,7 +12,7 @@ import {
   FileSpreadsheet
 } from 'lucide-react';
 import { ResidencePlace, RouteSettings } from './types';
-import { INITIAL_PLACES, INITIAL_SETTINGS } from './data/initialData';
+import { INITIAL_PLACES, INITIAL_SETTINGS, PLANILLA_DATA } from './data/initialData';
 import { RouteMap } from './components/RouteMap';
 import { ResidenceCard } from './components/ResidenceCard';
 import { Header } from './components/Header';
@@ -21,12 +21,39 @@ import { AddStopModal } from './components/AddStopModal';
 const STORAGE_KEY_PLACES = 'circuito_residencias_places_v1';
 const STORAGE_KEY_SETTINGS = 'circuito_residencias_settings_v1';
 
+// Helper to look up real link from spreadsheet
+const findSheetLink = (name: string): string | undefined => {
+  const clean = name.toLowerCase().trim();
+  const found = PLANILLA_DATA.find((entry) => {
+    const entryName = entry.nombre.toLowerCase().trim();
+    return entryName === clean || clean.includes(entryName) || entryName.includes(clean);
+  });
+  return found?.link;
+};
+
 export default function App() {
   const [places, setPlaces] = useState<ResidencePlace[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY_PLACES);
       if (saved) {
-        return JSON.parse(saved);
+        const parsed: ResidencePlace[] = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed.map((p) => {
+            const sheetLink = findSheetLink(p.name);
+            // If the current website is missing or outdated/fake, replace with spreadsheet link
+            if (
+              !p.website ||
+              p.website.includes('ayresdeleloir.com.ar') ||
+              p.website.includes('elatardecerdeleloir.com.ar') ||
+              p.website.includes('soldeotono.com.ar')
+            ) {
+              if (sheetLink) {
+                return { ...p, website: sheetLink };
+              }
+            }
+            return p;
+          });
+        }
       }
     } catch {
       // fallback
