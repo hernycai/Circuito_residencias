@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/* Leaflet Custom Styles */
+.custom-marker {
+  background-color: #ef4444;
+  color: white;
+  border: 3px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.5);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  user-select: none;
+}
+
+.custom-marker.active-marker {
+  background-color: #b91c1c;
+  transform: scale(1.18);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.4);
+}
+
+.custom-marker.visited-marker {
+  background-color: #059669;
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.4);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12);
+  padding: 0.25rem;
+  font-family: inherit;
+}
+
+.leaflet-popup-content {
+  margin: 0.75rem 1rem !important;
+  line-height: 1.4 !important;
+}
+
+/* Inline editable styling */
+.editable-field:hover {
+  outline: 2px dashed #93c5fd;
+  border-radius: 4px;
+  background-color: rgba(239, 246, 255, 0.7);
+  cursor: text;
+}
+
+.editable-field:focus {
+  outline: 2px solid #2563eb;
+  border-radius: 4px;
+  background-color: #eff6ff;
+}
+
+/* Print optimizations */
+@media print {
+  @page {
+    margin: 0.8cm;
+    size: auto;
+  }
+  
+  body {
+    background-color: #ffffff !important;
+    padding: 0 !important;
+    font-size: 10pt;
+    color: #0f172a !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  #map, .leaflet-container {
+    height: 280px !important;
+    border: 1px solid #cbd5e1 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .page-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    margin-bottom: 0.6rem !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
