@@ -6,7 +6,6 @@
 import { useState, useEffect } from 'react';
 import {
   MapPin,
-  AlertCircle,
   Clock,
   Navigation2,
   PlusCircle,
@@ -138,16 +137,6 @@ export default function App() {
           onOpenAddModal={() => setIsAddModalOpen(true)}
           onReset={handleReset}
         />
-
-        {/* Informative notification banner (no-print) */}
-        <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-2.5 flex items-center justify-between text-xs text-amber-900 no-print shadow-xs">
-          <div className="flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
-            <span>
-              <strong>Documento editable:</strong> Puedes hacer clic y modificar directamente cualquier nombre, dirección, precio o agregar notas de visita en la hoja. Los cambios se guardan automáticamente.
-            </span>
-          </div>
-        </div>
 
         {/* Interactive Map Section */}
         <section className="bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-slate-200">
