@@ -2,5 +2,7 @@
   "name": "Circuito Residencias - Villa Udaondo",
   "description": "Hoja de ruta interactiva y editable para el circuito de visitas a residencias en Parque Leloir y Villa Udaondo con mapa GPS y exportación PDF.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

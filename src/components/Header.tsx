@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import {
   Navigation,
-  Printer,
-  Plus,
   RotateCcw,
   Share2,
   Check,
@@ -14,7 +12,7 @@ interface HeaderProps {
   settings: RouteSettings;
   places: ResidencePlace[];
   onUpdateSettings: (newSettings: RouteSettings) => void;
-  onOpenAddModal: () => void;
+  onOpenAddModal?: () => void;
   onReset: () => void;
 }
 
@@ -22,7 +20,6 @@ export const Header: React.FC<HeaderProps> = ({
   settings,
   places,
   onUpdateSettings,
-  onOpenAddModal,
   onReset,
 }) => {
   const [copied, setCopied] = useState(false);
@@ -33,10 +30,6 @@ export const Header: React.FC<HeaderProps> = ({
     .join('/')}`;
 
   const visitedCount = places.filter((p) => p.visited).length;
-
-  const handlePrint = () => {
-    window.print();
-  };
 
   const handleCopySummary = () => {
     const summaryText = `${settings.title}\n${settings.subtitle}\n\n${places
@@ -126,28 +119,6 @@ export const Header: React.FC<HeaderProps> = ({
           <Navigation className="w-4 h-4" />
           Abrir GPS en Google Maps
         </a>
-
-        {/* Print / PDF Export */}
-        <button
-          type="button"
-          onClick={handlePrint}
-          className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all border border-slate-200"
-          title="Imprimir o guardar como PDF"
-        >
-          <Printer className="w-4 h-4 text-slate-500" />
-          <span>Imprimir / PDF</span>
-        </button>
-
-        {/* Add residence stop */}
-        <button
-          type="button"
-          onClick={onOpenAddModal}
-          className="flex items-center gap-1.5 bg-red-50 hover:bg-red-100 text-red-700 px-3 py-2.5 rounded-xl font-medium text-sm transition-all border border-red-200"
-          title="Agregar una nueva residencia a la hoja de ruta"
-        >
-          <Plus className="w-4 h-4" />
-          <span className="hidden sm:inline">Nueva Parada</span>
-        </button>
 
         {/* Copy summary */}
         <button
