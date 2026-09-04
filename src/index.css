@@ -82,6 +82,8 @@
   }
 
   .page-card {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
     page-break-inside: avoid;
     break-inside: avoid;
     box-shadow: none !important;
@@ -94,4 +96,5 @@
     print-color-adjust: exact !important;
   }
 }
+
 

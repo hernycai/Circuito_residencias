@@ -69,7 +69,9 @@ export const ResidenceCard: React.FC<ResidenceCardProps> = ({
     <div
       id={`place-card-${place.id}`}
       className={`page-card bg-white border transition-all duration-200 p-5 rounded-2xl shadow-sm flex flex-col gap-3.5 relative ${
-        isFocused ? 'border-red-500 ring-2 ring-red-100 shadow-md' : 'border-slate-200 hover:border-red-300'
+        isFocused
+          ? 'border-red-500 ring-2 ring-red-100 shadow-md'
+          : 'border-slate-200 hover:border-red-300'
       } ${place.visited ? 'bg-emerald-50/20' : ''}`}
     >
       {/* Top row */}
@@ -141,7 +143,7 @@ export const ResidenceCard: React.FC<ResidenceCardProps> = ({
             {/* Address */}
             <div className="text-slate-600 text-sm mt-1.5 flex items-center gap-1.5 flex-wrap">
               <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-              <strong>Dirección:</strong>
+              <strong className="text-slate-700">Dirección:</strong>
               <span
                 contentEditable
                 suppressContentEditableWarning
@@ -156,7 +158,7 @@ export const ResidenceCard: React.FC<ResidenceCardProps> = ({
             {/* Phone */}
             <div className="text-slate-600 text-sm mt-1 flex items-center gap-1.5 flex-wrap">
               <Phone className="w-4 h-4 text-slate-400 shrink-0" />
-              <strong>Teléfono:</strong>
+              <strong className="text-slate-700">Teléfono:</strong>
               <span
                 contentEditable
                 suppressContentEditableWarning
@@ -206,7 +208,7 @@ export const ResidenceCard: React.FC<ResidenceCardProps> = ({
                       contentEditable
                       suppressContentEditableWarning
                       onBlur={(e) => handleTieredChange(tier.id, 'label', e.currentTarget.textContent || '')}
-                      className="editable-field px-1"
+                      className="editable-field px-1 text-slate-600"
                     >
                       {tier.label}:
                     </span>

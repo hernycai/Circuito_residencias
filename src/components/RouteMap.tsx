@@ -127,7 +127,7 @@ export const RouteMap: React.FC<RouteMapProps> = ({
     } else if (latlngs.length === 1) {
       map.setView(latlngs[0], 15);
     }
-  }, [places, onSelectPlace]);
+  }, [places, onSelectPlace, focusedPlaceId]);
 
   // Handle focus changes
   useEffect(() => {
@@ -169,3 +169,4 @@ export const RouteMap: React.FC<RouteMapProps> = ({
     </div>
   );
 };
+

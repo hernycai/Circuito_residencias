@@ -49,6 +49,16 @@ export default function App() {
   const [focusedPlaceId, setFocusedPlaceId] = useState<number | null>(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
+  // Clean up any remaining dark mode state
+  useEffect(() => {
+    document.documentElement.classList.remove('dark');
+    try {
+      localStorage.removeItem('circuito_residencias_dark_mode_v1');
+    } catch {
+      // ignore
+    }
+  }, []);
+
   // Save changes to localStorage
   useEffect(() => {
     try {
@@ -201,7 +211,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setIsAddModalOpen(true)}
-                className="inline-flex items-center gap-1.5 text-xs bg-white hover:bg-slate-50 text-slate-700 font-medium px-3 py-1.5 rounded-xl border border-slate-200 shadow-xs transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs bg-white hover:bg-slate-50 text-slate-700 font-medium px-3 py-1.5 rounded-xl border border-slate-200 shadow-xs transition-colors cursor-pointer"
               >
                 <PlusCircle className="w-3.5 h-3.5 text-red-600" />
                 Agregar Parada

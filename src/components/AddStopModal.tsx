@@ -60,7 +60,7 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100"
+            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -77,7 +77,7 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Ej. Residencia Parque Leloir"
-              className="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full text-sm bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
 
@@ -91,7 +91,7 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="Ej. Martín Fierro 2900, Parque Leloir"
-              className="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full text-sm bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
 
@@ -105,7 +105,7 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="Ej. 1144556677"
-                className="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full text-sm bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
 
@@ -118,7 +118,7 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="Ej. $3.200.000 o A consultar"
-                className="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full text-sm bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
           </div>
@@ -133,7 +133,7 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
                 step="any"
                 value={lat}
                 onChange={(e) => setLat(parseFloat(e.target.value))}
-                className="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full text-sm bg-white text-slate-900 border border-slate-300 rounded-xl px-3.5 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
             <div>
@@ -145,7 +145,7 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
                 step="any"
                 value={lng}
                 onChange={(e) => setLng(parseFloat(e.target.value))}
-                className="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full text-sm bg-white text-slate-900 border border-slate-300 rounded-xl px-3.5 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
           </div>
@@ -159,7 +159,7 @@ export const AddStopModal: React.FC<AddStopModalProps> = ({
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Ej. Visita programada para las 15:30 hs..."
-              className="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full text-sm bg-white text-slate-900 placeholder-slate-400 border border-slate-300 rounded-xl px-3.5 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
 
